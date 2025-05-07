@@ -1,0 +1,496 @@
+<!--
+  Documento HTML Commentato: Progetto Arduino - Giardino Intelligente Anti-Furto
+  Tema Blu & Nero: integrato nel codice esistente
+-->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <!-- Definisce la codifica in UTF-8 -->
+  <meta charset="UTF-8">
+  <!-- Rende la pagina responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Titolo della pagina -->
+  <title>Progetto Arduino: Giardino Intelligente Anti-Furto</title>
+
+  <!-- Stili CSS interni - tema blu & nero -->
+  <style>
+    /* Reset base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Body */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;    /* Azzurro chiarissimo */
+      color: #111;            /* Testo quasi nero */
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+    /* Header */
+    header {
+      background: #005f99;    /* Blu intenso */
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: #e0f7ff;         /* Azzurro pallido */
+    }
+    /* Navbar */
+    nav {
+      background: #007acc;    /* Blu medio */
+      padding: 10px 20px;
+    }
+    nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover { color: #ccefff; }
+    /* Container */
+    .container { max-width: 1100px; margin: 20px auto; padding: 0 20px; }
+    /* Sezioni */
+    section {
+      background: #fff;
+      padding: 30px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      color: #005f99;        /* Blu intenso */
+      margin-bottom: 10px;
+      border-bottom: 2px solid #99d6ff; /* Azzurro chiaro */
+      padding-bottom: 5px;
+    }
+    h3 { margin-top: 15px; color: #007acc; /* Blu medio */ }
+    /* Testi e liste */
+    p, ul, ol { margin-bottom: 15px; font-size: 1.1em; }
+    ul, ol { margin-left: 20px; }
+    /* Box codice */
+    .code-box {
+      color: #f0f8ff;    /* Azzurro chiarissimo */
+      background: #003f66; /* Blu scuro */
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      font-family: "Courier New", monospace;
+      font-size: 0.9em;
+    }
+    /* Placeholder */
+    .placeholder, .media-box {
+      border: 2px dashed #007acc; /* Blu medio */
+      border-radius: 5px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+      background: #e6f4ff; /* Azzurro chiaro */
+      color: #555;
+      font-style: italic;
+    }
+    /* Box funzionalità */
+    .functionality { background: #e0f7ff; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    /* Box spiegazioni */
+    .explanation { background: #f4fcff; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    /* Footer fisso */
+    .footer-container {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #005f99;
+      color: #fff;
+      padding: 7px 15px;
+      border-radius: 4px;
+    }
+    /* Immagini */
+    .mia-immagine { max-width: 100%; height: auto; }
+    /* Ritorno */
+    .return {
+      font-family: 'Georgia', serif;
+      font-size: 0.95em;
+      color: #005f99;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header con ancora per "INDIETRO" -->
+  <header id="indietro">
+    <h1>Progetto Arduino: Giardino Intelligente Anti-Furto</h1>
+    <p>Sistema di sicurezza per il monitoraggio del giardino con Arduino</p>
+  </header>
+  
+  <!-- Menu di navigazione -->
+  <nav>
+    <ul>
+      <li><a href="#introduzione">Introduzione</a></li>
+      <li><a href="#obiettivi">Obiettivi</a></li>
+      <li><a href="#componenti">Componenti</a></li>
+      <li><a href="#schema">Schema del Sistema</a></li>
+      <li><a href="#codici">Codici Arduino</a></li>
+      <li><a href="#html">Spiegazione HTML</a></li>
+      <li><a href="#conclusioni">Conclusioni</a></li>
+      <li><a href="#arduino">Conclusioni</a></li>
+      <li><a href="../Arduino/Prova1.html">CASA!</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <!-- Introduzione -->
+    <section id="introduzione">
+      <h2>Introduzione</h2>
+      <p>
+        Il progetto mira a simulare un sistema di sorveglianza per il giardino basato su Arduino. 
+        Il sistema rileva movimenti, invia un avviso sonoro e visivo in caso di intrusione 
+        e mostra lo stato corrente sul display. Un pulsante permette di resettare l'allarme.
+      </p>
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+    
+    <!-- Obiettivi -->
+    <section id="obiettivi">
+      <h2>Obiettivi del Progetto</h2>
+      <ul>
+        <li>Rilevare intrusioni tramite sensore PIR.</li>
+        <li>Segnalare l'allarme con buzzer e display LCD.</li>
+        <li>Monitorare lo stato del sistema in tempo reale.</li>
+      </ul>
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+    
+    <!-- Componenti -->
+    <section id="componenti">
+      <h2>Componenti Necessari</h2>
+      <ul>
+        <li>Arduino UNO</li>
+        <li>Sensore PIR</li>
+        <li>Buzzer</li>
+        <li>Display LCD (16×2)</li>
+        <li>Sensore ad ultrasuoni</li>
+        <li>LED (verde e rosso)</li>
+        <li>Breadboard, cavi Dupont e pulsante di reset</li>
+      </ul>
+    </section>
+    
+    <!-- Schema -->
+    <section id="schema">
+      <h2>Schema del Sistema</h2>
+      <ol>
+        <li>
+          <strong>Sensore ad ultrasuoni HC‑SR04</strong>:  
+          il pin <code>TRIG</code> (variabile <code>trigPin</code>) è collegato al pin <em>6</em> di Arduino,  
+          e il pin <code>ECHO</code> (variabile <code>echoPin</code>) al pin <em>4</em>.
+        </li>
+        <li>
+          <strong>Buzzer</strong>:  
+          il pin <code>buzzerPin</code> è collegato al pin <em>8</em> di Arduino.
+        </li>
+        <li>
+          <strong>LED verde</strong>:  
+          il pin <code>greenLedPin</code> è collegato al pin <em>7</em> di Arduino.
+        </li>
+        <li>
+          <strong>LED rosso</strong>:  
+          il pin <code>redLedPin</code> è collegato al pin <em>2</em> di Arduino.
+        </li>
+        <li>
+          <strong>Pulsante di reset</strong>:  
+          il pin <code>buttonPin</code> è collegato al pin <em>5</em> di Arduino  
+          (configurato come <code>INPUT_PULLUP</code> e rimandato a GND).
+        </li>
+        <li>
+          <strong>Display LCD 16×2</strong>:  
+          <ul>
+            <li>pin <code>rs</code> → pin <em>3</em> di Arduino</li>
+            <li>pin <code>en</code> → pin <em>13</em> di Arduino</li>
+            <li>pin <code>d4</code> → pin <em>10</em> di Arduino</li>
+            <li>pin <code>d5</code> → pin <em>11</em> di Arduino</li>
+            <li>pin <code>d6</code> → pin <em>9</em> di Arduino</li>
+            <li>pin <code>d7</code> → pin <em>12</em> di Arduino</li>
+          </ul>
+        </li>
+      </ol>
+      <div class="mia-immagine">
+        <img src="/workspaces/Informatica2425/TPSI/Arduino/Fotoprova2.jpg" alt="Schema del circuito">
+      </div>
+      <br>
+      <br>
+      <h2>Schema del Sistema <i>(tinkercad)</i></h2>
+      <img src="/workspaces/Informatica2425/TPSI/Arduino/Thin.jpg" alt="Schema del circuito">
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+    
+    
+    <!-- Codici Arduino -->
+    <section id="codici">
+      <h2>Codice Html</h2>
+      <p>Spiegazione del codice</p>
+      <div class="code-box">
+        <pre><code>
+          #include <LiquidCrystal.h>
+
+            const int pinTrig     = 6;
+            const int pinEcho     = 4;
+            const int pinBuzzer   = 8;
+            const int pinLedVerde = 7;
+            const int pinLedRosso = 2;
+            const int pinPulsante = 5;
+            
+            // Pin per LCD in modalità 4 bit
+            const int pinRS = 3;
+            const int pinEN = 13;
+            const int pinD4 = 10;
+            const int pinD5 = 11;
+            const int pinD6 = 9;
+            const int pinD7 = 12;
+            
+            const int sogliaDistanza = 10;
+            const int modoPullup = INPUT_PULLUP;
+            
+            enum StatoAllarme { DISATTIVATO, ATTIVO };
+            StatoAllarme stato     = DISATTIVATO;
+            StatoAllarme statoPrec = DISATTIVATO;
+            
+            void setup() {
+              Serial.begin(9600);
+            
+              pinMode(pinTrig,     OUTPUT);
+              pinMode(pinEcho,     INPUT);
+              pinMode(pinBuzzer,   OUTPUT);
+              pinMode(pinLedVerde, OUTPUT);
+              pinMode(pinLedRosso, OUTPUT);
+              pinMode(pinPulsante, modoPullup);
+            
+              lcdInizializza();
+              aggiornaDisplay();
+            }
+            
+            void loop() {
+              bool premuto = (digitalRead(pinPulsante) == LOW);
+            
+              if (stato == ATTIVO && premuto) {
+                stato = DISATTIVATO;
+              } else if (stato == DISATTIVATO) {
+                int distanza = misuraDistanza();
+                Serial.print("Distanza: ");
+                Serial.print(distanza);
+                Serial.println(" cm");
+            
+                if (distanza > 0 && distanza < sogliaDistanza) {
+                  stato = ATTIVO;
+                }
+              }
+            
+              if (stato != statoPrec) {
+                aggiornaDisplay();
+                statoPrec = stato;
+              }
+            
+              if (stato == ATTIVO) {
+                digitalWrite(pinLedRosso, HIGH);
+                digitalWrite(pinLedVerde, LOW);
+                tone(pinBuzzer, 2000);
+              } else {
+                digitalWrite(pinLedRosso, LOW);
+                digitalWrite(pinLedVerde, HIGH);
+                noTone(pinBuzzer);
+              }
+            
+              delay(100);
+            }
+            
+            // — LCD BASE —
+            
+            void lcdComando(byte valore) {
+              digitalWrite(pinRS, LOW);
+              lcdInvia(valore);
+            }
+            
+            void lcdScrivi(byte valore) {
+              digitalWrite(pinRS, HIGH);
+              lcdInvia(valore);
+            }
+            
+            void lcdInvia(byte valore) {
+              digitalWrite(pinD4, (valore >> 4) & 0x01);
+              digitalWrite(pinD5, (valore >> 5) & 0x01);
+              digitalWrite(pinD6, (valore >> 6) & 0x01);
+              digitalWrite(pinD7, (valore >> 7) & 0x01);
+              lcdAbilita();
+            
+              digitalWrite(pinD4, valore & 0x01);
+              digitalWrite(pinD5, (valore >> 1) & 0x01);
+              digitalWrite(pinD6, (valore >> 2) & 0x01);
+              digitalWrite(pinD7, (valore >> 3) & 0x01);
+              lcdAbilita();
+            }
+            
+            void lcdAbilita() {
+              digitalWrite(pinEN, LOW);
+              delayMicroseconds(1);
+              digitalWrite(pinEN, HIGH);
+              delayMicroseconds(1);
+              digitalWrite(pinEN, LOW);
+              delayMicroseconds(100);
+            }
+            
+            void lcdInizializza() {
+              pinMode(pinRS, OUTPUT);
+              pinMode(pinEN, OUTPUT);
+              pinMode(pinD4, OUTPUT);
+              pinMode(pinD5, OUTPUT);
+              pinMode(pinD6, OUTPUT);
+              pinMode(pinD7, OUTPUT);
+            
+              delay(50);
+            
+              digitalWrite(pinRS, LOW);
+              digitalWrite(pinD4, LOW);
+              digitalWrite(pinD5, HIGH);
+              digitalWrite(pinD6, LOW);
+              digitalWrite(pinD7, LOW);
+              lcdAbilita();
+            
+              lcdComando(0x28); // 4 bit, 2 righe
+              lcdComando(0x0C); // Display ON, cursore OFF
+              lcdComando(0x06); // Avanza cursore
+              lcdComando(0x01); // Clear
+              delay(2);
+            }
+            
+            void lcdPulisci() {
+              lcdComando(0x01);
+              delay(2);
+            }
+            
+            void lcdCursore(byte col, byte riga) {
+              const byte posizioni[] = {0x00, 0x40};
+              lcdComando(0x80 | (col + posizioni[riga]));
+            }
+            
+            void lcdStampa(const char* testo) {
+              for (int i = 0; testo[i] != '\0'; i++) {
+                lcdScrivi(testo[i]);
+              }
+            }
+            
+            // — AGGIORNA DISPLAY LCD IN BASE ALLO STATO —
+            
+            void aggiornaDisplay() {
+              lcdPulisci();
+            
+              if (stato == ATTIVO) {
+                lcdCursore(0, 0);
+                const char riga1[] = "INTRUSIONE";
+                lcdStampa(riga1);
+            
+                lcdCursore(0, 1);
+                const char riga2[] = "RILEVATA";
+                lcdStampa(riga2);
+              } else {
+                lcdCursore(0, 0);
+                const char riga1[] = "ALLARME";
+                lcdStampa(riga1);
+            
+                lcdCursore(0, 1);
+                const char riga2[] = "DISATTIVO";
+                lcdStampa(riga2);
+              }
+            }
+            
+            // — MISURA DISTANZA CON HC-SR04 —
+            
+            int misuraDistanza() {
+              digitalWrite(pinTrig, LOW);
+              delayMicroseconds(2);
+              digitalWrite(pinTrig, HIGH);
+              delayMicroseconds(10);
+              digitalWrite(pinTrig, LOW);
+            
+              long durata = pulseIn(pinEcho, HIGH, 30000);
+              if (durata == 0) return -1;
+              return durata * 0.0344 / 2;
+            }
+        </code></pre>
+      </div>
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+    
+    <!-- Spiegazione HTML -->
+    <section id="html">
+      <h2>Spiegazione del Codice HTML </h2>
+      <div class="explanation">
+        <ol>
+          <li><code>&lt;html&gt;</code>: radice del documento.</li>
+          <li><code>&lt;head&gt;</code>: metadati e stili.</li>
+          <li><code>&lt;style&gt;</code>: definizione del CSS interno.</li>
+          <li><code>&lt;body&gt;</code>: contiene il contenuto visibile.</li>
+          <li><code>&lt;header&gt;</code>: intestazione con titolo.</li>
+          <li><code>&lt;nav&gt;</code>: barra di navigazione.</li>
+          <li><code>&lt;section&gt;</code>: suddivide in blocchi tematici.</li>
+          <li><code>&lt;p&gt;</code>: paragrafo;</li>
+          <li><code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code>: liste;</li>
+          <li><code>&lt;li&gt;</code>: elemento di lista.</li>
+          <li><code>&lt;a&gt;</code>: link interno.</li>
+          <li><code>&lt;div&gt;</code>: contenitore generico.</li>
+          <li><code>&lt;footer&gt;</code>: piè di pagina.</li>
+        </ol>
+      </div>
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+
+    <section id="arduino">
+      <h2>Spiegazione Codice Arduino</h2>
+      <div class="explanation">
+        <ol>
+          <li><strong>Definizione dei Pin e Variabili</strong>:<br>
+              i pin vengono assegnati a sensore PIR, ultrasuoni, buzzer, LED (verde/rosso), pulsante e LCD; 
+              lo stato dell'allarme è gestito da una <code>enum</code> (DISARMED/ARMED).
+          </li>
+          <li><strong>Setup</strong>:<br>
+              <code>pinMode</code> imposta i pin come <code>INPUT</code> o <code>OUTPUT</code>;<br>
+              <code>lcd.begin()</code> inizializza il display LCD; <code>updateDisplay()</code> mostra il messaggio iniziale.
+          </li>
+          <li><strong>Loop Principale</strong>:<br>
+              ogni 100 ms verifica:<ul>
+                <li>pulsante premuto → disarma l'allarme;</li>
+                <li>se disarmato → misura la distanza.</li>
+              </ul>
+              se la distanza è sotto soglia (es. 10 cm) passa allo stato ARMED.
+          </li>
+          <li><strong>misuraDistanza()</strong>:<br>
+              invia impulso al <code>TRIG</code>, legge durata con <code>pulseIn</code>,
+              converte in cm (<code>durata * 0.0344 / 2</code>).
+          </li>
+          <li><strong>Aggiornamento Display</strong>:<br>
+              quando lo stato cambia, <code>updateDisplay()</code> mostra <em>"ALLARME ATTIVO"</em> o <em>"ALLARME DISATTIVATO"</em>.
+          </li>
+          <li><strong>LED e Buzzer</strong>:<br>
+              ARMED → LED rosso acceso, verde spento, buzzer a 2 kHz;<br>
+              DISARMED → LED verde acceso, rosso spento, buzzer spento.
+          </li>
+          <li><strong>Gestione Manuale LCD</strong>:<br>
+              funzioni <code>lcdWrite()</code>, <code>lcdCommand()</code>, <code>lcdSend()</code> gestiscono il bus a 4 bit;
+              <code>lcdPrint()</code> scrive stringhe su LCD.
+          </li>
+          <li><strong>Struttura Modulare</strong>:<br>
+              codice suddiviso in funzioni chiare (LCD, distanza, stato, output),
+              nomi in italiano e significativi.
+          </li>
+        </ol>
+      </div>
+      <p class="return"><a href="#indietro">INDIETRO</a></p>
+    </section>
+    <div class="footer-container">
+      <footer>
+        <p>2025 Progetto Arduino - Giardino Intelligente Anti-Furto</p>
+      </footer>
+    </div>
+    
+</body>
+</html>
